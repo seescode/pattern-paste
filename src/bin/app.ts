@@ -9,6 +9,11 @@ interface Settings {
     files: string[];
 }
 
+interface FileInfo {
+    path: string; // The original path of the file
+    contents: string; // The contents of the file 
+}
+
 
 export class App {
     private package: Settings;
@@ -18,9 +23,9 @@ export class App {
     }
 
     public main() {
-        this.loadFiles(this.package.basePath, this.package.files).then((files: any[]) => {
+        this.loadFiles(this.package.basePath, this.package.files).then((files: FileInfo[]) => {
         
-            files.forEach((file: any) => {
+            files.forEach((file: FileInfo) => {
                 const patterns = this.generatePatterns(this.package.find, this.package.replace);
                 var result = file.contents;
                 patterns.forEach(p => {
@@ -40,9 +45,8 @@ export class App {
         const promises = fullFilePaths.map(f => fs.readFile(f, 'utf8'));
 
         return Promise.all(promises).then(function(values) {            
-            
-            return values.map(n => ({
-                path: '', //TODO: figure out a way to remember the original path
+            return values.map((n, index) => ({
+                path: fullFilePaths[index], 
                 contents: n
             }));
         })

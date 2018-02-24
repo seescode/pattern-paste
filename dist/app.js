@@ -8,7 +8,6 @@ class App {
         this.package = require('../settings.json');
     }
     main() {
-        var str = 'Life is a chicken-meat ChickenMeat chickenMeat';
         this.loadFiles(this.package.basePath, this.package.files).then((files) => {
             files.forEach((file) => {
                 const patterns = this.generatePatterns(this.package.find, this.package.replace);
@@ -24,8 +23,8 @@ class App {
         const fullFilePaths = files.map(f => os.homedir() + basePath + f);
         const promises = fullFilePaths.map(f => fs.readFile(f, 'utf8'));
         return Promise.all(promises).then(function (values) {
-            return values.map(n => ({
-                path: '',
+            return values.map((n, index) => ({
+                path: fullFilePaths[index],
                 contents: n
             }));
         })
