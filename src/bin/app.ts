@@ -18,31 +18,39 @@ export class App {
     }
 
     public main() {
-
-        var str = 'Life is a chicken-meat ChickenMeat chickenMeat';
-
-
-        this.loadFiles(this.package.basePath, this.package.files);
-
-        const patterns = this.generatePatterns(this.package.find, this.package.replace);
-        var result = str;
-        patterns.forEach(p => {
-            result = result.replace(new RegExp(p.find, 'g'), p.replace);
+        this.loadFiles(this.package.basePath, this.package.files).then((files: any[]) => {
+        
+            files.forEach((file: any) => {
+                const patterns = this.generatePatterns(this.package.find, this.package.replace);
+                var result = file.contents;
+                patterns.forEach(p => {
+                    result = result.replace(new RegExp(p.find, 'g'), p.replace);
+                });
+        
+                // TODO: write out to a new file instead of just console logging it
+                console.log(result);
+            });
         });
-
-        console.log(result);
     }
 
     public loadFiles(basePath: string, files: string[]) {
-        files.forEach(f => {
-            fs.readFile(os.homedir() + basePath + f, 'utf8')
-            .then((data: any) => {
-                console.log(data);   
-            })
-            .catch((err: any) => {
-                console.error(err)
-            });            
-        });
+
+
+        const fullFilePaths = files.map(f => os.homedir() + basePath + f);
+        const promises = fullFilePaths.map(f => fs.readFile(f, 'utf8'));
+
+        return Promise.all(promises).then(function(values) {            
+            
+            return values.map(n => ({
+                path: '', //TODO: figure out a way to remember the original path
+                contents: n
+            }));
+        })
+        .catch((err: any) => {
+            // TODO: move this catch block to the main function since we want to 
+            // catch errors at the top most level
+            console.error(err)
+        });            
     }
 
     public generatePatterns(find: string, replace: string) {

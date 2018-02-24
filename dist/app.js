@@ -9,23 +9,28 @@ class App {
     }
     main() {
         var str = 'Life is a chicken-meat ChickenMeat chickenMeat';
-        this.loadFiles(this.package.basePath, this.package.files);
-        const patterns = this.generatePatterns(this.package.find, this.package.replace);
-        var result = str;
-        patterns.forEach(p => {
-            result = result.replace(new RegExp(p.find, 'g'), p.replace);
+        this.loadFiles(this.package.basePath, this.package.files).then((files) => {
+            files.forEach((file) => {
+                const patterns = this.generatePatterns(this.package.find, this.package.replace);
+                var result = file.contents;
+                patterns.forEach(p => {
+                    result = result.replace(new RegExp(p.find, 'g'), p.replace);
+                });
+                console.log(result);
+            });
         });
-        console.log(result);
     }
     loadFiles(basePath, files) {
-        files.forEach(f => {
-            fs.readFile(os.homedir() + basePath + f, 'utf8')
-                .then((data) => {
-                console.log(data);
-            })
-                .catch((err) => {
-                console.error(err);
-            });
+        const fullFilePaths = files.map(f => os.homedir() + basePath + f);
+        const promises = fullFilePaths.map(f => fs.readFile(f, 'utf8'));
+        return Promise.all(promises).then(function (values) {
+            return values.map(n => ({
+                path: '',
+                contents: n
+            }));
+        })
+            .catch((err) => {
+            console.error(err);
         });
     }
     generatePatterns(find, replace) {

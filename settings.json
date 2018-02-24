@@ -1,5 +1,5 @@
 {
-    "find": "chickenMeat",
+    "find": "the",
 	"replace": "abc-def-ghi",
 	"basePath": "/Documents/GitHub/pattern-paste",
 	"files": [
