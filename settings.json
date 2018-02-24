@@ -1,0 +1,9 @@
+{
+    "find": "chickenMeat",
+	"replace": "abc-def-ghi",
+	"basePath": "/kasdf/kasdf/kdsfj",
+	"files": [
+		"/adfskjadsf/abc.txt",
+		"/adfskjadsf/cow/"
+	]
+}
