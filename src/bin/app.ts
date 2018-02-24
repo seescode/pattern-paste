@@ -1,4 +1,6 @@
-var changeCase = require('change-case')
+const changeCase = require('change-case')
+const fs = require('fs-extra')
+const os = require('os')
 
 interface Settings {
     find: string;
@@ -19,14 +21,28 @@ export class App {
 
         var str = 'Life is a chicken-meat ChickenMeat chickenMeat';
 
-        const patterns = this.generatePatterns(this.package.find, this.package.replace);
 
+        this.loadFiles(this.package.basePath, this.package.files);
+
+        const patterns = this.generatePatterns(this.package.find, this.package.replace);
         var result = str;
         patterns.forEach(p => {
             result = result.replace(new RegExp(p.find, 'g'), p.replace);
         });
 
         console.log(result);
+    }
+
+    public loadFiles(basePath: string, files: string[]) {
+        files.forEach(f => {
+            fs.readFile(os.homedir() + basePath + f, 'utf8')
+            .then((data: any) => {
+                console.log(data);   
+            })
+            .catch((err: any) => {
+                console.error(err)
+            });            
+        });
     }
 
     public generatePatterns(find: string, replace: string) {

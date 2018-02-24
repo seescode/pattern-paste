@@ -5,6 +5,7 @@
 	"repository": "",
 	"license": "MIT",
 	"scripts": {
+		"start": "npm run build && ./bin/pattern-paste",		
 		"clean": "rimraf dist",
 		"build": "npm run clean && tsc --pretty",
 		"test": "npm run build && mocha --compilers ts:ts-node/register --recursive test/**/*-spec.ts",
@@ -39,6 +40,7 @@
 	},
 	"dependencies": {
 		"change-case": "^3.0.1",
-		"commander": "^2.9.0"
+		"commander": "^2.9.0",
+		"fs-extra": "^5.0.0"
 	}
 }

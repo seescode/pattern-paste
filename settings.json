@@ -1,9 +1,9 @@
 {
     "find": "chickenMeat",
 	"replace": "abc-def-ghi",
-	"basePath": "/kasdf/kasdf/kdsfj",
+	"basePath": "/Documents/GitHub/pattern-paste",
 	"files": [
-		"/adfskjadsf/abc.txt",
-		"/adfskjadsf/cow/"
+        "/tsconfig.json",
+        "/LICENSE"
 	]
 }
