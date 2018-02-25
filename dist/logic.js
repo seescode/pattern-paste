@@ -5,13 +5,9 @@ const fs = require('fs-extra');
 const os = require('os');
 function patternPaste(settings) {
     return this.loadFiles(settings.basePath, settings.files).then((files) => {
+        const patterns = this.generatePatterns(settings.find, settings.replace);
         files.forEach((file) => {
-            const patterns = this.generatePatterns(settings.find, settings.replace);
-            var result = file.contents;
-            patterns.forEach((p) => {
-                result = result.replace(new RegExp(p.find, 'g'), p.replace);
-            });
-            console.log(result);
+            generateFile(patterns, file);
         });
     })
         .catch((err) => {
@@ -19,6 +15,15 @@ function patternPaste(settings) {
     });
 }
 exports.patternPaste = patternPaste;
+function generateFile(patterns, file) {
+    var newContents = file.contents;
+    patterns.forEach((p) => {
+        newContents = newContents.replace(new RegExp(p.find, 'g'), p.replace);
+    });
+    console.log(newContents);
+    var targetPath;
+}
+exports.generateFile = generateFile;
 function loadFiles(basePath, files) {
     const fullFilePaths = files.map(f => os.homedir() + basePath + f);
     const promises = fullFilePaths.map(f => fs.readFile(f, 'utf8'));

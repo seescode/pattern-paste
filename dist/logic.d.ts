@@ -13,6 +13,7 @@ export interface SearchPattern {
     replace: string;
 }
 export declare function patternPaste(settings: Settings): any;
+export declare function generateFile(patterns: SearchPattern[], file: FileInfo): void;
 export declare function loadFiles(basePath: string, files: string[]): Promise<{
     path: string;
     contents: any;

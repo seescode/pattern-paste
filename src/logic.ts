@@ -20,23 +20,37 @@ export interface SearchPattern {
 }
 
 export function patternPaste(settings: Settings) {
+
+
     return this.loadFiles(settings.basePath, settings.files).then((files: FileInfo[]) => {
+        const patterns = this.generatePatterns(settings.find, settings.replace);
 
         files.forEach((file: FileInfo) => {
-            const patterns = this.generatePatterns(settings.find, settings.replace);
-            var result = file.contents;
-
-            patterns.forEach((p: SearchPattern) => {
-                result = result.replace(new RegExp(p.find, 'g'), p.replace);
-            });
-
-            // TODO: write out to a new file instead of just console logging it
-            console.log(result);
+            generateFile(patterns, file);
         });
     })
     .catch((err: any) => {
         console.error(err)
     });    
+}
+
+export function generateFile(patterns: SearchPattern[], file: FileInfo) {
+    var newContents = file.contents;
+
+    patterns.forEach((p: SearchPattern) => {
+        newContents = newContents.replace(new RegExp(p.find, 'g'), p.replace);
+    });
+
+    // TODO: write out to a new file instead of just console logging it
+    console.log(newContents);
+
+    var targetPath: string;
+
+    // Take file.path and then remove the file name from it and replace with 
+    // the renamed version.
+
+
+    // fs.writeFileSync(targetPath, newContents, 'utf8');
 }
 
 export function loadFiles(basePath: string, files: string[]) {
