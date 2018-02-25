@@ -8,7 +8,7 @@ describe('File', () => {
 
         // Arrange
         try {
-            fs.copySync('test/file/inputs/category.tss', 'test/file/temp/category.tss')
+            fs.copySync('test/file/inputs/category.tss', 'temp/category.tss')
         } catch (err) {
             console.error(err)
         }
@@ -17,13 +17,14 @@ describe('File', () => {
             find: 'category',
             replace: 'expected',
             basePath: '/Documents/GitHub/pattern-paste',
-            files: [                           
-                "/test/file/temp/category.tss"
+            files: [
+                '/temp/category.tss'
             ]
         };
 
         // Act
-        patternPaste(settings).then(() => {
+        return patternPaste(settings).then(() => {
+
             // Assert
             expect(2).to.equal(2);
         })

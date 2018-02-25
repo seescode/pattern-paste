@@ -43,11 +43,7 @@ export function loadFiles(basePath: string, files: string[]) {
     const fullFilePaths = files.map(f => os.homedir() + basePath + f);
     const promises = fullFilePaths.map(f => fs.readFile(f, 'utf8'));
 
-    console.log(1, fullFilePaths, promises);
-
     return Promise.all(promises).then(function (values) {
-
-        console.log(2);
         return values.map((n, index) => ({
             path: fullFilePaths[index],
             contents: n
