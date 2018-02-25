@@ -1,7 +1,7 @@
 import { patternPaste, Settings } from '../../src/logic';
 import { expect } from 'chai';
+const os = require('os')
 const fs = require('fs-extra')
-
 
 describe('File', () => {
     it('should generate expected result', () => {
@@ -26,7 +26,11 @@ describe('File', () => {
         return patternPaste(settings).then(() => {
 
             // Assert
-            expect(2).to.equal(2);
-        })
+            const generatedFile = fs.readFileSync('temp/expected.tss', 'utf8');
+            const expectedFile = fs.readFileSync('test/file/expected/expected.tss', 'utf8');
+
+            expect(generatedFile).to.equal(expectedFile);
+            expect(generatedFile).to.not.be.null; 
+        });
     });
 });

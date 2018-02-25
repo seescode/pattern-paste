@@ -3,6 +3,7 @@ Object.defineProperty(exports, "__esModule", { value: true });
 const changeCase = require('change-case');
 const fs = require('fs-extra');
 const os = require('os');
+const path = require('path');
 function patternPaste(settings) {
     return this.loadFiles(settings.basePath, settings.files).then((files) => {
         const patterns = this.generatePatterns(settings.find, settings.replace);
@@ -17,11 +18,12 @@ function patternPaste(settings) {
 exports.patternPaste = patternPaste;
 function generateFile(patterns, file) {
     var newContents = file.contents;
+    var newFileName = file.path;
     patterns.forEach((p) => {
         newContents = newContents.replace(new RegExp(p.find, 'g'), p.replace);
+        newFileName = newFileName.replace(new RegExp(p.find, 'g'), p.replace);
     });
-    console.log(newContents);
-    var targetPath;
+    fs.writeFileSync(newFileName, newContents, 'utf8');
 }
 exports.generateFile = generateFile;
 function loadFiles(basePath, files) {

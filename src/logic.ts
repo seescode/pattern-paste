@@ -1,6 +1,8 @@
 const changeCase = require('change-case')
 const fs = require('fs-extra')
 const os = require('os')
+const path = require('path');
+
 
 export interface Settings {
     find: string;
@@ -36,21 +38,14 @@ export function patternPaste(settings: Settings) {
 
 export function generateFile(patterns: SearchPattern[], file: FileInfo) {
     var newContents = file.contents;
+    var newFileName = file.path;
 
     patterns.forEach((p: SearchPattern) => {
         newContents = newContents.replace(new RegExp(p.find, 'g'), p.replace);
+        newFileName = newFileName.replace(new RegExp(p.find, 'g'), p.replace);
     });
 
-    // TODO: write out to a new file instead of just console logging it
-    console.log(newContents);
-
-    var targetPath: string;
-
-    // Take file.path and then remove the file name from it and replace with 
-    // the renamed version.
-
-
-    // fs.writeFileSync(targetPath, newContents, 'utf8');
+    fs.writeFileSync(newFileName, newContents, 'utf8');
 }
 
 export function loadFiles(basePath: string, files: string[]) {
