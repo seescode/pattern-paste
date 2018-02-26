@@ -9,6 +9,7 @@ describe('File', () => {
         // Arrange
         try {
             fs.copySync('test/file/inputs/category.tss', 'temp/category.tss')
+            fs.copySync('test/file/inputs/category.1.tss', 'temp/category.1.tss')            
         } catch (err) {
             console.error(err)
         }
@@ -18,7 +19,8 @@ describe('File', () => {
             replace: 'expected',
             basePath: '/Documents/GitHub/pattern-paste',
             files: [
-                '/temp/category.tss'
+                '/temp/category.tss',
+                '/temp/category.1.tss',                
             ]
         };
 
@@ -31,6 +33,15 @@ describe('File', () => {
 
             expect(generatedFile).to.equal(expectedFile);
             expect(generatedFile).to.not.be.null; 
+
+
+            const generatedFile2 = fs.readFileSync('temp/expected.1.tss', 'utf8');
+            const expectedFile2 = fs.readFileSync('test/file/expected/expected.1.tss', 'utf8');
+
+            expect(generatedFile2).to.equal(expectedFile2);
+            expect(generatedFile2).to.not.be.null; 
+
+            
         });
     });
 });
