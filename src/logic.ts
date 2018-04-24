@@ -1,7 +1,6 @@
-const changeCase = require('change-case')
-const fs = require('fs-extra')
-const os = require('os')
-const path = require('path');
+const changeCase = require('change-case');
+const fs = require('fs-extra');
+const os = require('os');
 
 
 export interface Settings {
@@ -24,8 +23,8 @@ export interface SearchPattern {
 export function patternPaste(settings: Settings) {
 
 
-    return this.loadFiles(settings.basePath, settings.files).then((files: FileInfo[]) => {
-        const patterns = this.generatePatterns(settings.find, settings.replace);
+    return loadFiles(settings.basePath, settings.files).then((files: FileInfo[]) => {
+        const patterns = generatePatterns(settings.find, settings.replace);
 
         files.forEach((file: FileInfo) => {
             generateFile(patterns, file);
