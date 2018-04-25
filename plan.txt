@@ -7,8 +7,6 @@ Pattern paste features:
 
 
 Plan:
--Figure out how to hook into menus for what the pattern paste settings will be (instead of using settings.json)
-  -https://code.visualstudio.com/docs/extensionAPI/extension-points#_contributesconfiguration
 -Support pasting multiple files 
 -Figure out how to make it work off of folders
 -Figure out how to make it work for a mix of folders and files 
@@ -22,7 +20,7 @@ Plan:
                 }
             ]  
 -Figure out how to hook into keyboard shortcuts
--
+-Bug where the name of the project also gets replaced in the big find and replace. 
 
 
 

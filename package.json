@@ -54,7 +54,23 @@
 																"command": "extension.sayHello",
 																"title": "Hello World"
 												}
-								]
+								],
+								"configuration": {
+									"type": "object",
+									"title": "TypeScript configuration",
+									"properties": {
+										"patternpaste.find": {
+											"type": "string",
+											"default": "",
+											"description": "The pattern you are searching for."
+										},
+										"patternpaste.replace": {
+											"type": ["string"],
+											"default": "",
+											"description": "The replacment pattern."
+										}
+									}
+								}								
 				},
 				"bin": {
 								"pattern-paste": "bin/pattern-paste"

@@ -51,21 +51,17 @@ export function activate(context: vscode.ExtensionContext) {
 
         // vscode.window.showInformationMessage('Url: ' + uri);
 
-        let cow = '';
 
-        if (uris !== null && uris !== undefined) {
-            uris.forEach(n => {
-                cow += n.path + ', ';
-            });
-        }
 
-        vscode.window.showInformationMessage('Urls: ' + cow);
-        
+        const findPattern = vscode.workspace.getConfiguration('patternpaste').get('find', '');
+        const replacePattern = vscode.workspace.getConfiguration('patternpaste').get('replace', '');
 
-        // /Users/yong/Documents/GitHub/budget/src/app/effects/routing.effects.ts,
+        vscode.window.showInformationMessage('find: ' + findPattern);
+        vscode.window.showInformationMessage('replace: ' + replacePattern);
+
         const settings: Settings = {
-            find: 'routing',
-            replace: '234234',
+            find: findPattern,
+            replace: replacePattern,
             basePath: '',
             files: uris.map(n => n.path)
         };
