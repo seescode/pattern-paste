@@ -7,10 +7,9 @@ Pattern paste features:
 
 
 Plan:
--Then run pattern paste on it and log it out.
--Generate the files (based on whatever is in the settings.json)
 -Figure out how to hook into menus for what the pattern paste settings will be (instead of using settings.json)
   -https://code.visualstudio.com/docs/extensionAPI/extension-points#_contributesconfiguration
+-Support pasting multiple files 
 -Figure out how to make it work off of folders
 -Figure out how to make it work for a mix of folders and files 
 -Figure out how to hook into the context menu

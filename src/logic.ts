@@ -1,6 +1,5 @@
 const changeCase = require('change-case');
 const fs = require('fs-extra');
-const os = require('os');
 
 
 export interface Settings {
@@ -16,8 +15,8 @@ export interface FileInfo {
 }
 
 export interface SearchPattern {
-    find: string,
-    replace: string
+    find: string;
+    replace: string;
 }
 
 export function patternPaste(settings: Settings) {
@@ -48,7 +47,7 @@ export function generateFile(patterns: SearchPattern[], file: FileInfo) {
 }
 
 export function loadFiles(basePath: string, files: string[]) {
-    const fullFilePaths = files.map(f => os.homedir() + basePath + f);
+    const fullFilePaths = files.map(f => basePath + f);
     const promises = fullFilePaths.map(f => fs.readFile(f, 'utf8'));
 
     return Promise.all(promises).then(function (values) {

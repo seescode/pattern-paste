@@ -2,6 +2,7 @@
 // The module 'vscode' contains the VS Code extensibility API
 // Import the module and reference it with the alias vscode in your code below
 import * as vscode from 'vscode';
+import { patternPaste, Settings } from './logic';
 
 // this method is called when your extension is activated
 // your extension is activated the very first time the command is executed
@@ -34,7 +35,7 @@ export function activate(context: vscode.ExtensionContext) {
 
     context.subscriptions.push(disposable);
 
-    let moveDisposable = vscode.commands.registerCommand('extension.patternPaste', (uri?:vscode.Uri, uris?:vscode.Uri[]) => {
+    let moveDisposable = vscode.commands.registerCommand('extension.patternPaste', (uri:vscode.Uri, uris:vscode.Uri[]) => {
         // if(uris && uris.length > 1) {
         //     const dir = path.dirname(uris[0].fsPath);
         //     if(uris.every(u => path.dirname(u.fsPath) == dir)) {
@@ -48,8 +49,7 @@ export function activate(context: vscode.ExtensionContext) {
         //     filePath = getCurrentPath();
         // }
 
-        vscode.window.showInformationMessage('Url: ' + uri);
-
+        // vscode.window.showInformationMessage('Url: ' + uri);
 
         let cow = '';
 
@@ -61,7 +61,19 @@ export function activate(context: vscode.ExtensionContext) {
 
         vscode.window.showInformationMessage('Urls: ' + cow);
         
-        
+
+        // /Users/yong/Documents/GitHub/budget/src/app/effects/routing.effects.ts,
+        const settings: Settings = {
+            find: 'routing',
+            replace: '234234',
+            basePath: '',
+            files: uris.map(n => n.path)
+        };
+
+        // Act
+        return patternPaste(settings).then(() => {
+            vscode.window.showInformationMessage('Pasted');
+        });
     });
 
 
