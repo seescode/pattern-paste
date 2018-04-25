@@ -7,7 +7,6 @@ Pattern paste features:
 
 
 Plan:
--Get "npm run unittest" to work
 -Then run pattern paste on it and log it out.
 -Generate the files (based on whatever is in the settings.json)
 -Figure out how to hook into menus for what the pattern paste settings will be (instead of using settings.json)
