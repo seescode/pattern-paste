@@ -8,6 +8,7 @@ Pattern paste features:
 
 Plan:
 -Figure out how to make it work off of folders
+    -Look into logic.ts and make sure expandFolders() works 
 -Make sure the unit tests do not have any xit 
 -Figure out how to make it work for a mix of folders and files 
 -Figure out how to hook into the context menu

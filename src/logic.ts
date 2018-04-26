@@ -1,5 +1,5 @@
 const changeCase = require('change-case');
-const fs = require('fs-extra');
+const fs = require('fs');
 
 
 export interface Settings {
@@ -35,11 +35,24 @@ export function patternPaste(settings: Settings) {
     });    
 }
 
-export function expandFolders(files: string[]): string[] {
+export function expandFolders(files: string[]): any {
     
-    // Need to find folders and then recursively pull out the files from it. 
+    const newFiles = files.map(file => {
 
-    return files;
+        if (fs.lstatSync(file).isDirectory()) {          
+            // pull out the files from the folder
+            const filesFromFolder = fs.readdirSync(file);
+
+            // pass this to expandFolders and then return it. 
+            return expandFolders(filesFromFolder);
+        } else if (fs.lstatSync(file).isFile()) {
+            return file;
+        } else {
+            throw 'Your selected file/folder is not a valid file or folder.';
+        }
+    });
+
+    return newFiles;
 }
 
 export function generateFile(patterns: SearchPattern[], file: FileInfo) {
