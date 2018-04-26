@@ -7,8 +7,8 @@ Pattern paste features:
 
 
 Plan:
--Support pasting multiple files 
 -Figure out how to make it work off of folders
+-Make sure the unit tests do not have any xit 
 -Figure out how to make it work for a mix of folders and files 
 -Figure out how to hook into the context menu
   https://code.visualstudio.com/docs/extensionAPI/extension-points#_contributesmenus
@@ -21,7 +21,7 @@ Plan:
             ]  
 -Figure out how to hook into keyboard shortcuts
 -Bug where the name of the project also gets replaced in the big find and replace. 
-
-
-
--
+-Write good documentation
+-semantic version it and put it on npm 
+-Setup github contribution file
+-Get feedback and see what you can improve on it. 

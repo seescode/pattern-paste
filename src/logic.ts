@@ -21,8 +21,9 @@ export interface SearchPattern {
 
 export function patternPaste(settings: Settings) {
 
+    const files = expandFolders(settings.files);
 
-    return loadFiles(settings.basePath, settings.files).then((files: FileInfo[]) => {
+    return loadFiles(settings.basePath, files).then((files: FileInfo[]) => {
         const patterns = generatePatterns(settings.find, settings.replace);
 
         files.forEach((file: FileInfo) => {
@@ -32,6 +33,13 @@ export function patternPaste(settings: Settings) {
     .catch((err: any) => {
         console.error(err)
     });    
+}
+
+export function expandFolders(files: string[]): string[] {
+    
+    // Need to find folders and then recursively pull out the files from it. 
+
+    return files;
 }
 
 export function generateFile(patterns: SearchPattern[], file: FileInfo) {

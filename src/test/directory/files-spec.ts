@@ -4,12 +4,11 @@ const fs = require('fs-extra');
 const os = require('os');
 
 describe('File', () => {
-    xit('should generate expected result', () => {
+    it('should generate expected result', () => {
 
         // Arrange
         try {
-            fs.copySync('src/test/file/inputs/category.tss', 'temp/category.tss');
-            fs.copySync('src/test/file/inputs/category.1.tss', 'temp/category.1.tss');
+            fs.copySync('src/test/directory/inputs', 'temp');
         } catch (err) {
             console.error(err);
         }
@@ -19,8 +18,7 @@ describe('File', () => {
             replace: 'expected',
             basePath: os.homedir() + '/Documents/GitHub/pattern-paste',
             files: [
-                '/temp/category.tss',
-                '/temp/category.1.tss',                
+                '/temp',
             ]
         };
 
@@ -28,15 +26,15 @@ describe('File', () => {
         return patternPaste(settings).then(() => {
 
             // Assert
-            const generatedFile = fs.readFileSync('temp/expected.tss', 'utf8');
-            const expectedFile = fs.readFileSync('src/test/file/expected/expected.tss', 'utf8');
+            const generatedFile = fs.readFileSync('temp/expected/expected.tss', 'utf8');
+            const expectedFile = fs.readFileSync('src/test/file/expected/expected/expected.tss', 'utf8');
 
             expect(generatedFile).to.equal(expectedFile);
             expect(generatedFile).to.not.equal(null);
 
 
-            const generatedFile2 = fs.readFileSync('temp/expected.1.tss', 'utf8');
-            const expectedFile2 = fs.readFileSync('src/test/file/expected/expected.1.tss', 'utf8');
+            const generatedFile2 = fs.readFileSync('temp/expected/expected.1.tss', 'utf8');
+            const expectedFile2 = fs.readFileSync('src/test/file/expected/expected/expected.1.tss', 'utf8');
 
             expect(generatedFile2).to.equal(expectedFile2);
             expect(generatedFile2).to.not.equal(null);            
