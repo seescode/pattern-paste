@@ -1,6 +1,6 @@
 const changeCase = require('change-case');
 const fs = require('fs');
-
+const path = require('path');
 
 export interface Settings {
     find: string;
@@ -21,9 +21,10 @@ export interface SearchPattern {
 
 export function patternPaste(settings: Settings) {
 
-    const files = expandFolders(settings.files);
+    const files = expandFolders(settings.basePath, settings.files);
 
-    return loadFiles(settings.basePath, files).then((files: FileInfo[]) => {
+    return loadFiles(files).then((files: FileInfo[]) => {
+
         const patterns = generatePatterns(settings.find, settings.replace);
 
         files.forEach((file: FileInfo) => {
@@ -35,20 +36,23 @@ export function patternPaste(settings: Settings) {
     });    
 }
 
-export function expandFolders(files: string[]): any {
+export function expandFolders(basePath: string, files: string[]): any {
+    const fullFilePaths = files.map(f => path.join(basePath, f));
+
+    let newFiles: string[] = [];
     
-    const newFiles = files.map(file => {
+    fullFilePaths.forEach(file => {
 
         if (fs.lstatSync(file).isDirectory()) {          
             // pull out the files from the folder
             const filesFromFolder = fs.readdirSync(file);
 
             // pass this to expandFolders and then return it. 
-            return expandFolders(filesFromFolder);
+            newFiles = [...newFiles, ...expandFolders(file, filesFromFolder)];
         } else if (fs.lstatSync(file).isFile()) {
-            return file;
+            newFiles.push(file);
         } else {
-            throw 'Your selected file/folder is not a valid file or folder.';
+            throw new Error('Your selected file/folder is not a valid file or folder.');
         }
     });
 
@@ -67,16 +71,18 @@ export function generateFile(patterns: SearchPattern[], file: FileInfo) {
     fs.writeFileSync(newFileName, newContents, 'utf8');
 }
 
-export function loadFiles(basePath: string, files: string[]) {
-    const fullFilePaths = files.map(f => basePath + f);
-    const promises = fullFilePaths.map(f => fs.readFile(f, 'utf8'));
+export function loadFiles(files: string[]) {
+    const promises = files.map(f => fs.readFile(f, 'utf8'));
 
     return Promise.all(promises).then(function (values) {
+
+        console.log('content', values[0]);
+
         return values.map((n, index) => ({
-            path: fullFilePaths[index],
+            path: files[index],
             contents: n
         }));
-    })
+    });
 }
 
 export function generatePatterns(find: string, replace: string): SearchPattern[] {
