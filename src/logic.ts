@@ -1,5 +1,5 @@
 const changeCase = require('change-case');
-const fs = require('fs');
+const fs = require('fs-extra');
 const path = require('path');
 
 export interface Settings {
@@ -76,7 +76,6 @@ export function loadFiles(files: string[]) {
 
     return Promise.all(promises).then(function (values) {
 
-        console.log('content', values[0]);
 
         return values.map((n, index) => ({
             path: files[index],

@@ -7,11 +7,11 @@ Pattern paste features:
 
 
 Plan:
--Figure out how to make it work off of folders
-  -Look into logic.ts and make sure expandFolders() works 
-  -For some reason loadFiles() is not working.  When it load 
-  files it's returning undefined for the content of each file
-  even though the path seems fine.  
+-Make sure the unit tests do not have any xit 
+  -Delete the temp folder before each run of the test so that things work!
+-Bug with creating new files.  It fails if an intermediary directory
+is not found.  Maybe fs-extra has an option to create intermediary 
+folders.
 -Test cases:
   -Try a simple one level directory 
   -Try a double level directory 
@@ -19,7 +19,6 @@ Plan:
   -Create some crazy scenario 
 
 
--Make sure the unit tests do not have any xit 
 -Figure out how to make it work for a mix of folders and files 
 -Figure out how to hook into the context menu
   https://code.visualstudio.com/docs/extensionAPI/extension-points#_contributesmenus

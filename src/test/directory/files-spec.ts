@@ -26,15 +26,15 @@ describe('File', () => {
         return patternPaste(settings).then(() => {
 
             // Assert
-            const generatedFile = fs.readFileSync('temp/expected/expected.tss', 'utf8');
-            const expectedFile = fs.readFileSync('src/test/file/expected/expected/expected.tss', 'utf8');
+            const generatedFile = fs.readFileSync('temp/sound/expected.tss', 'utf8');
+            const expectedFile = fs.readFileSync('src/test/directory/expected/sound/expected.tss', 'utf8');
 
             expect(generatedFile).to.equal(expectedFile);
             expect(generatedFile).to.not.equal(null);
 
 
-            const generatedFile2 = fs.readFileSync('temp/expected/expected.1.tss', 'utf8');
-            const expectedFile2 = fs.readFileSync('src/test/file/expected/expected/expected.1.tss', 'utf8');
+            const generatedFile2 = fs.readFileSync('temp/sound/expected.1.tss', 'utf8');
+            const expectedFile2 = fs.readFileSync('src/test/directory/expected/sound/expected.1.tss', 'utf8');
 
             expect(generatedFile2).to.equal(expectedFile2);
             expect(generatedFile2).to.not.equal(null);            
