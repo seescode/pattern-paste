@@ -7,8 +7,6 @@ Pattern paste features:
 
 
 Plan:
--Make sure the unit tests do not have any xit 
-  -Delete the temp folder before each run of the test so that things work!
 -Bug with creating new files.  It fails if an intermediary directory
 is not found.  Maybe fs-extra has an option to create intermediary 
 folders.
