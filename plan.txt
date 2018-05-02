@@ -7,14 +7,11 @@ Pattern paste features:
 
 
 Plan:
--Bug with creating new files.  It fails if an intermediary directory
-is not found.  Maybe fs-extra has an option to create intermediary 
-folders.
--Test cases:
-  -Try a double level directory 
-  -Try a double level directory and one directory with an empty
-  -Create some crazy scenario 
-
+-Make a test where you copy a file that does not have anything to replace 
+-Make a test where a folder name is like categorySomething and then it 
+renames to expectedSomething
+-You need to modify your tests so that it category is at least 2 syllables long
+-Add a test for a 3 syllable
 
 -Figure out how to make it work for a mix of folders and files 
 -Figure out how to hook into the context menu
