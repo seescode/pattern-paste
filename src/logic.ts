@@ -68,7 +68,7 @@ export function generateFile(patterns: SearchPattern[], file: FileInfo) {
         newFileName = newFileName.replace(new RegExp(p.find, 'g'), p.replace);
     });
 
-    fs.writeFileSync(newFileName, newContents, 'utf8');
+    fs.outputFileSync(newFileName, newContents, 'utf8');
 }
 
 export function loadFiles(files: string[]) {
