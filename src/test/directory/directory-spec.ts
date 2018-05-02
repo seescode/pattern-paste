@@ -3,11 +3,12 @@ import { expect } from 'chai';
 const fs = require('fs-extra');
 const os = require('os');
 
-describe('File', () => {
+describe('Directory', () => {
     it('should generate expected result', () => {
 
         // Arrange
         try {
+            fs.removeSync('temp');
             fs.copySync('src/test/directory/inputs', 'temp');
         } catch (err) {
             console.error(err);

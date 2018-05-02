@@ -4,10 +4,11 @@ const fs = require('fs-extra');
 const os = require('os');
 
 describe('File', () => {
-    xit('should generate expected result', () => {
+    it('should generate expected result', () => {
 
         // Arrange
         try {
+            fs.removeSync('temp');
             fs.copySync('src/test/file/inputs/category.tss', 'temp/category.tss');
             fs.copySync('src/test/file/inputs/category.1.tss', 'temp/category.1.tss');
         } catch (err) {
