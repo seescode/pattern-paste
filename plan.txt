@@ -7,7 +7,6 @@ Pattern paste features:
 
 
 Plan:
--Make a test where you copy a file that does not have anything to replace 
 -Make a test where a folder name is like categorySomething and then it 
 renames to expectedSomething
 -You need to modify your tests so that it category is at least 2 syllables long

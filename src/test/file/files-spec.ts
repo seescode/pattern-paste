@@ -11,6 +11,7 @@ describe('File', () => {
             fs.removeSync('temp');
             fs.copySync('src/test/file/inputs/category.tss', 'temp/category.tss');
             fs.copySync('src/test/file/inputs/category.1.tss', 'temp/category.1.tss');
+            fs.copySync('src/test/file/inputs/no-change.tss', 'temp/no-change.tss');            
         } catch (err) {
             console.error(err);
         }
@@ -22,6 +23,7 @@ describe('File', () => {
             files: [
                 '/temp/category.tss',
                 '/temp/category.1.tss',                
+                '/temp/no-change.tss'
             ]
         };
 
@@ -41,6 +43,12 @@ describe('File', () => {
 
             expect(generatedFile2).to.equal(expectedFile2);
             expect(generatedFile2).to.not.equal(null);            
+
+            const generatedFile3 = fs.readFileSync('temp/no-change.tss', 'utf8');
+            const expectedFile3 = fs.readFileSync('src/test/file/expected/no-change.tss', 'utf8');
+
+            expect(generatedFile3).to.equal(expectedFile3);
+            expect(generatedFile3).to.not.equal(null);                        
         });
     });
 });
