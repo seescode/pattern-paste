@@ -7,12 +7,10 @@ Pattern paste features:
 
 
 Plan:
--Make a test where a folder name is like categorySomething and then it 
-renames to expectedSomething
--You need to modify your tests so that it category is at least 2 syllables long
--Add a test for a 3 syllable
-
+-Add a test for a 3 syllable.  Probably just add to the nested version.
 -Figure out how to make it work for a mix of folders and files 
+
+
 -Figure out how to hook into the context menu
   https://code.visualstudio.com/docs/extensionAPI/extension-points#_contributesmenus
 
@@ -26,5 +24,6 @@ renames to expectedSomething
 -Bug where the name of the project also gets replaced in the big find and replace. 
 -Write good documentation
 -semantic version it and put it on npm 
+-protect master and only allow PRs to update the code.
 -Setup github contribution file
 -Get feedback and see what you can improve on it. 
