@@ -7,8 +7,6 @@ Pattern paste features:
 
 
 Plan:
--protect master and only allow PRs to update the code.
-  -only allow squash commits 
 -Setup github contribution file
 -Write readme.md
 -turn on tslint full blast
