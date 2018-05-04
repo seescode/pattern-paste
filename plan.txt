@@ -8,6 +8,7 @@ Pattern paste features:
 
 Plan:
 -Setup github contribution file
+-Integrate with travisci or circleci in order to have it run all the unit tests for the PRs 
 -Write readme.md
 -turn on tslint full blast
   https://blog.dmbcllc.com/one-tweak-improved-angular-code/
