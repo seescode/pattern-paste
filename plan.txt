@@ -7,6 +7,15 @@ Pattern paste features:
 
 
 Plan:
+-protect master and only allow PRs to update the code.
+  -only allow squash commits 
+-Setup github contribution file
+-Write readme.md
+-turn on tslint full blast
+  https://blog.dmbcllc.com/one-tweak-improved-angular-code/
+  https://palantir.github.io/tslint/usage/configuration/
+  typescript script mode 
+
 -Add a test for a 3 syllable.  Probably just add to the nested version.
 -Figure out how to make it work for a mix of folders and files 
 
@@ -22,8 +31,5 @@ Plan:
             ]  
 -Figure out how to hook into keyboard shortcuts
 -Bug where the name of the project also gets replaced in the big find and replace. 
--Write good documentation
 -semantic version it and put it on npm 
--protect master and only allow PRs to update the code.
--Setup github contribution file
 -Get feedback and see what you can improve on it. 
