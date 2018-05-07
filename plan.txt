@@ -7,7 +7,7 @@ Pattern paste features:
 
 
 Plan:
--Setup github contribution file
+-Fix your tests so that they work on travisci 
 -Integrate with travisci or circleci in order to have it run all the unit tests for the PRs 
 -Write readme.md
 -turn on tslint full blast

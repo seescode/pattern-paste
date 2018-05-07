@@ -1,7 +1,6 @@
 import { patternPaste, Settings } from '../../logic';
 import { expect } from 'chai';
 const fs = require('fs-extra');
-const os = require('os');
 
 describe('twoSyllable file', () => {
     it('should generate expected result', () => {
@@ -18,10 +17,10 @@ describe('twoSyllable file', () => {
         const settings: Settings = {
             find: 'missing-category',
             replace: 'reallyExpected',
-            basePath: os.homedir() + '/Documents/GitHub/pattern-paste',
+            basePath: '',
             files: [
-                '/temp/missing-category.tss',
-                '/temp/_missingCategory.tss',
+                'temp/missing-category.tss',
+                'temp/_missingCategory.tss',
             ]
         };
 

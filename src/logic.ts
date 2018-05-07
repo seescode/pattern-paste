@@ -75,8 +75,6 @@ export function loadFiles(files: string[]) {
     const promises = files.map(f => fs.readFile(f, 'utf8'));
 
     return Promise.all(promises).then(function (values) {
-
-
         return values.map((n, index) => ({
             path: files[index],
             contents: n

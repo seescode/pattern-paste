@@ -1,7 +1,6 @@
 import { patternPaste, Settings } from '../../logic';
 import { expect } from 'chai';
 const fs = require('fs-extra');
-const os = require('os');
 
 describe('File', () => {
     it('should generate expected result', () => {
@@ -19,17 +18,16 @@ describe('File', () => {
         const settings: Settings = {
             find: 'category',
             replace: 'expected',
-            basePath: os.homedir() + '/Documents/GitHub/pattern-paste',
+            basePath: '',
             files: [
-                '/temp/category.tss',
-                '/temp/category.1.tss',                
-                '/temp/no-change.tss'
+                'temp/category.tss',
+                'temp/category.1.tss',                
+                'temp/no-change.tss'
             ]
         };
 
         // Act
         return patternPaste(settings).then(() => {
-
             // Assert
             const generatedFile = fs.readFileSync('temp/expected.tss', 'utf8');
             const expectedFile = fs.readFileSync('src/test/file/expected/expected.tss', 'utf8');
